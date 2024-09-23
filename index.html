@@ -1,0 +1,125 @@
+<html>
+<head>
+   <title>kys.penis</title>
+  <meta property="og:title" content="mathsorulez.school">
+  <meta property="og:description" content="k-8 learning at your finger tips">
+  <meta property="og:image" content="https://mathsorulez.github.io/mathsorulez.github.io/background.jpg">
+  <meta property="og:url" content="https://mathsorulez.github.io/mathsorulez.github.io/">
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#cmd {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: green;
+  font-family: Consolas, monospace;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+#input {
+  width: 100%;
+  background-color: transparent;
+  color: green;
+  border: none;
+  outline: none;
+}
+</style>
+</head>
+<body>
+<div id="cmd">
+  <div id="output"></div>
+  <input type="text" id="input" autofocus>
+</div>
+
+<script>
+const output = document.getElementById('output');
+const input = document.getElementById('input');
+
+input.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const command = input.value;
+    output.innerHTML += `<p>$ ${command}</p>`;
+    input.value = '';
+    executeCommand(command);
+  }
+});
+
+function executeCommand(command) {
+  switch (command) {
+    case 'help':
+      output.innerHTML += `<p>Available commands: help, clear, ipconfig, geo [ip], TFISTHIS, info</p>`;
+      break;
+    case 'clear':
+      output.innerHTML = '';
+      break;
+    case 'ipconfig':
+      fetch('/ipconfig')
+        .then(response => response.text())
+        .then(data => {
+          output.innerHTML += `<pre>${data}</pre>`;
+        })
+        .catch(error => {
+          output.innerHTML += `<p>Error: ${error}</p>`;
+        });
+      break;
+    case 'TFISTHIS':
+      output.innerHTML += `<pre>wussssuppp motherfucka</pre>`;
+      output.innerHTML += `<p>this is a browser based cmd made by sodaduhking mostly so i can do cool shit at school but if you find this than cool</p>`;
+      break;
+    case 'info':
+      output.innerHTML += `<p>prob his dad maybe his brother maybe his uncle</p>`;
+      output.innerHTML += `<p>Brandon Yingst</p>`;
+      output.innerHTML += `<p>Goes By Brandon Yingst</p>`;
+      output.innerHTML += `<p>Fairbanks, AK</p>`;
+      output.innerHTML += `<p>Age: 39</p>`;
+      output.innerHTML += `<p>Full Name: Brandon L Yingst</p>`;
+      output.innerHTML += `<p>Current Home Address:</p>`;
+      output.innerHTML += `<p>909 John Kalinas Rd</p>`;
+      output.innerHTML += `<p>Fairbanks AK 99712</p>`;
+      output.innerHTML += `<p>Past Addresses: Homes, Rental Properties, businesses, apartments, condos and/or other real estate associated with Brandon Yingst in Fairbanks, AK.</p>`;
+      output.innerHTML += `<p>1545 Hoyt St, Unit 60</p>`;
+      output.innerHTML += `<p>Anchorage AK 99508</p>`;
+      output.innerHTML += `<p>460 Kayci Ave</p>`;
+      output.innerHTML += `<p>Battle Mountain NV 89820</p>`;
+      output.innerHTML += `<p>5151 Aeronca Ave</p>`;
+      output.innerHTML += `<p>Fairbanks AK 99709</p>`;
+      output.innerHTML += `<p>Po Box 116</p>`;
+      output.innerHTML += `<p>Irvington IL 62848</p>`;
+      output.innerHTML += `<p>625 W Humboldt St, Unit 4</p>`;
+      output.innerHTML += `<p>Battle Mountain NV 89820</p>`;
+      output.innerHTML += `<p>Po Box 885</p>`;
+      output.innerHTML += `<p>Plains MT 59859</p>`;
+      output.innerHTML += `<p>Phone: Cell/Mobile/Wireless and/or landline telephone numbers for Brandon Yingst in Fairbanks, AK. (775) 389-9171</p>`;
+      output.innerHTML += `<p>(907) 490-3034</p>`;
+      output.innerHTML += `<p>(907) 488-2079</p>`;
+      output.innerHTML += `<p>(907) 488-2097</p>`;
+      output.innerHTML += `<p>AKA: Alias, Nicknames, alternate spellings, married and/or maiden names for Brandon Yingst in Fairbanks, AK. Brandon Yingst • Brandon Yings</p>`;
+      output.innerHTML += `<p>Relatives: Mother, father, sisters, brothers, spouses and/or former spouses of Brandon Yingst in Fairbanks, AK. Amber Yingst • Charles Yingst • Charles Yingst • Charrisse Yingst • Christine Yingst • Katherine Fortenberry • Matthew Yingst • Amanda Garland • Austin Perkins • Charles Yingst • Charrisse Yingst • Christina Fortenberry • Christina Yingst • Curtis Fortenberry</p>`;
+      break;
+    default:
+      if (command.startsWith('geo ')) {
+        const ip = command.split(' ')[1];
+        fetch(`https://ipapi.co/${ip}/json/`)
+          .then(response => response.json())
+          .then(data => {
+            output.innerHTML += `<p>Geolocation for ${ip}:</p>`;
+            output.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+          })
+          .catch(error => {
+            output.innerHTML += `<p>Error: ${error}</p>`;
+          });
+      } else {
+        output.innerHTML += `<p>Command not found: ${command}</p>`;
+      }
+  }
+}
+</script>
+</body>
+</html>
